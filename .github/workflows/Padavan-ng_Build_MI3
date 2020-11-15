@@ -1,0 +1,96 @@
+#修改 WORK_PAHT: 为要复制的目录
+#修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
+
+name: Padavan-ng_Build_MI3
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+env:
+  DOWN_TOOLCHAIN: true
+  WORK_PAHT: workdata              # mv工作目录
+  TCONFIG_FILE: trunk/configs/templates/xiaomi/mi-3.config
+  CN_DICT_FILE: trunk/user/www/dict/CN.dict
+  CN_MAKE_FILE: trunk/user/www/Makefile
+  TOOLCHAIN_URL: https://github.com/hminid/Padavan_MI3_Build/releases/download/v20201115/toolchain_out.tar.gz
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 
+    
+    steps:
+    - name: Checkout Master              # 导入主分支
+      uses: actions/checkout@master
+    - name: Initialization Environment   # 初始环境的设置
+      env:
+        DEBIAN_FRONTEND: noninteractive  # 非交互模式
+      run: |
+        # 安装依赖包
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
+        
+        # 创建自定义目录/opt/workdata
+        mv $WORK_PAHT /opt/workdata
+        mkdir -p /opt/images/
+           
+    - name: Clone Source Code
+      run: |             
+        # 克隆源码
+        git clone --depth=1 https://github.com/hminid/padavan-ng.git /opt/rt-n56u
+       
+    - name: Download ToolChain
+      run: |
+        if [ $DOWN_TOOLCHAIN = false ] ; then
+           # 构建工具链
+           cd /opt/rt-n56u/toolchain
+           sudo ./clean_sources.sh
+           sudo ./build_toolchain.sh
+         else
+           # 下载预编译的构建工具链
+           cd /opt/rt-n56u/toolchain
+           mkdir -p out
+           wget $TOOLCHAIN_URL -O out.tar.gz
+           tar -zxvf out.tar.gz -C out/
+        fi
+
+    - name: Copy workdata File
+      run: |
+        # 拷贝自定义文件
+        cd /opt/workdata
+        #cp -rf . /opt/rt-n56u/     
+        cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
+        cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
+        cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+    - name: Clear And Build
+      run: |
+        # 修改.config
+        cp -f /opt/rt-n56u/$TCONFIG_FILE /opt/rt-n56u/trunk/.config
+        # 清理和构建
+        cd /opt/rt-n56u/trunk
+        sudo ./clear_tree.sh
+        sudo ./build_firmware.sh
+        # 复制到上传目录
+        sudo mv -f images/*.trx /opt/images/
+
+    - name : Upload packages
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Padavan-packages
+        path: /opt/images
+
