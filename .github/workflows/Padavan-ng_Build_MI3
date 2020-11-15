@@ -11,7 +11,7 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: true
+  DOWN_TOOLCHAIN: false
   WORK_PAHT: workdata              # mv工作目录
   TCONFIG_FILE: trunk/configs/templates/xiaomi/mi-3.config
   CN_DICT_FILE: trunk/user/www/dict/CN.dict
