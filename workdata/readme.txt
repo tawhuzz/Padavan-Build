@@ -21,5 +21,5 @@ trunk
     └── www
         ├── dict
         │   └── CN.dict  ---简体中文语言文件
-        └── Makefile
+        └── Makefile     ---简体中文语言配置
         
