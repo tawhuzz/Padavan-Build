@@ -16,6 +16,7 @@ trunk
 │       └── xiaomi
 │           ├── mi-3.config      ---mi-3标准版配置
 │           └── mi-3_spi.config  ---mi-3改SPI闪存配置
+│           └── mi-3_4M.config   ---mi-3编译小于4M的固件方便从官方刷入
 └── user
     └── www
         ├── dict
