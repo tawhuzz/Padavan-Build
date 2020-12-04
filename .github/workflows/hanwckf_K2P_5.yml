@@ -47,12 +47,12 @@ jobs:
       run: |
         if [ $DOWN_TOOLCHAIN = false ] ; then
            # 构建工具链
-           cd /opt/rt-n56u/toolchain   
+           cd /opt/rt-n56u/toolchain-mipsel
            ./clean_toolchain
            ./build_toolchain
          else
            # 下载预编译的构建工具链
-           cd /opt/rt-n56u/toolchain
+           cd /opt/rt-n56u/toolchain-mipsel
            sh dl_toolchain.sh
          fi
     - name: Copy workdata File
