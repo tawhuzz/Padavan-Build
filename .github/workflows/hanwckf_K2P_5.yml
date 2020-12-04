@@ -1,4 +1,4 @@
-修改 WORK_PAHT: 为要复制的目录
+#修改 WORK_PAHT: 为要复制的目录
 #修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
 
 name: Padavan-hanwckf_K2P_5
