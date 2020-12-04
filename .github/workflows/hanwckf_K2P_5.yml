@@ -12,11 +12,8 @@ on:
         default: 'false'
 env:
   DOWN_TOOLCHAIN: true
-  WORK_PAHT: workdata              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/xiaomi/mi-3.config
-  CN_DICT_FILE: trunk/user/www/dict/CN.dict
-  CN_MAKE_FILE: trunk/user/www/Makefile
-  TOOLCHAIN_URL: https://github.com/hminid/Padavan-ng_MI3_Build/releases/download/v20201115/toolchain_out.tar.gz
+  WORK_PAHT: workdata_hanwckf              # mv工作目录
+  TCONFIG_FILE: trunk/configs/templates/K2P_nano-5.0.config
 
 jobs:
   build:
@@ -34,7 +31,7 @@ jobs:
         sudo apt-get update
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget 
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
         
         # 创建自定义目录/opt/workdata
@@ -44,29 +41,27 @@ jobs:
     - name: Clone Source Code
       run: |             
         # 克隆源码
-        git clone --depth=1 https://github.com/hminid/padavan-ng.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
        
     - name: Download ToolChain
       run: |
         if [ $DOWN_TOOLCHAIN = false ] ; then
            # 构建工具链
-           cd /opt/rt-n56u/toolchain
-           sudo ./clean_sources.sh
-           sudo ./build_toolchain.sh
+           cd /opt/rt-n56u/toolchain   
+           ./clean_toolchain
+           ./build_toolchain
          else
            # 下载预编译的构建工具链
            cd /opt/rt-n56u/toolchain
-           mkdir -p out
-           wget $TOOLCHAIN_URL -O out.tar.gz
-           tar -zxvf out.tar.gz -C out/
-        fi
+           sh dl_toolchain.sh
+         fi
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
         cd /opt/workdata
         #cp -rf . /opt/rt-n56u/     
-        cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
-        cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
+        #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
+        #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
         
     - name: SSH connection to Actions
@@ -82,8 +77,8 @@ jobs:
         cp -f /opt/rt-n56u/$TCONFIG_FILE /opt/rt-n56u/trunk/.config
         # 清理和构建
         cd /opt/rt-n56u/trunk
-        sudo ./clear_tree.sh
-        sudo ./build_firmware.sh
+        ./clear_tree
+        fakeroot ./build_firmware_modify K2P_nano-5.0     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
