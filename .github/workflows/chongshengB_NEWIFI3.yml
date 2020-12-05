@@ -11,7 +11,7 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: false
+  DOWN_TOOLCHAIN: true
   WORK_PAHT: workdata_chongshengB              # mv工作目录
   TCONFIG_FILE: trunk/configs/templates/NEWIFI3.config
 
