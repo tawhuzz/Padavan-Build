@@ -63,10 +63,9 @@ jobs:
         #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
         #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
-        #修正go
-        cd /opt/hostedtoolcache/go
-        rm -rf /opt/hostedtoolcache/go/1.14.12
-        mv 1.15.5 1.14.12
+        
+        #修正go，否则编译失败
+        sudo ./Set_Golang.sh
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
