@@ -63,7 +63,7 @@ jobs:
         #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
         #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
-        sudo Set_Golang.sh
+        sudo ./Set_Golang.sh
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
