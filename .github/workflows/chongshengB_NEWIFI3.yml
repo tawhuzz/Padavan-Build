@@ -11,7 +11,7 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: false
+  DOWN_TOOLCHAIN: true
   WORK_PAHT: workdata_chongshengB              # mv工作目录
   TCONFIG_FILE: trunk/configs/templates/NEWIFI3.config
 
@@ -67,7 +67,7 @@ jobs:
         #修正go，否则编译失败
         cd /opt/workdata
         sudo chmod 777 Set_Golang.sh
-        sudo ./Set_Golang.sh
+        # sudo ./Set_Golang.sh
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
