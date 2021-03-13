@@ -13,7 +13,7 @@ on:
 env:
   DOWN_TOOLCHAIN: true
   WORK_PAHT: workdata_hanwckf              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/PSG1218_nano.config
+  TCONFIG_FILE: trunk/configs/templates/PSG1218.config
 
 jobs:
   build:
@@ -78,7 +78,7 @@ jobs:
         # 清理和构建
         cd /opt/rt-n56u/trunk
         ./clear_tree
-        fakeroot ./build_firmware_modify PSG1218_nano     
+        fakeroot ./build_firmware_modify PSG1218     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
