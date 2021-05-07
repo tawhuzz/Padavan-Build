@@ -12,6 +12,7 @@ on:
         default: 'false'
 env:
   DOWN_TOOLCHAIN: false
+  COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_FILE: trunk/configs/templates/MI-3.config
 
@@ -28,12 +29,12 @@ jobs:
         DEBIAN_FRONTEND: noninteractive  # 非交互模式
       run: |
         # 安装依赖包
-        sudo apt-get update
-        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
-        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
-        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget 
+        sudo apt update
+        sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
+        fakeroot kmod cpio git python3-docutils gettext automake autopoint \
+        texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
+        libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
-        
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
@@ -58,11 +59,13 @@ jobs:
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
+        if [ $COPY_WORK_DATA = true ] ; then
         cd /opt/workdata
         #cp -rf . /opt/rt-n56u/     
         #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
         #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        fi
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
