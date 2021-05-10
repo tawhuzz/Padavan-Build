@@ -1,5 +1,5 @@
 #修改 WORK_PAHT: 为要复制的目录
-#修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
+#修改 TCONFIG_NAME: 为配制文件要与configs/templates/目录下的名字相同
 
 name: Padavan-hanwckf_K2P
 on:
@@ -14,8 +14,9 @@ env:
   DOWN_TOOLCHAIN: false
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/K2P.config
-
+  TCONFIG_NAME: MI-3
+  TCONFIG_PATH: trunk/configs/templates
+  
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -34,8 +35,8 @@ jobs:
         fakeroot kmod cpio git python3-docutils gettext automake autopoint \
         texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
         libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
-        sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
-        
+        # 设置时区
+        sudo timedatectl set-timezone 'Asia/Shanghai'   
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
@@ -63,10 +64,8 @@ jobs:
         # 拷贝自定义文件
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
-           #cp -rf . /opt/rt-n56u/     
-           #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
-           #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
-           cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+           #cp -rf . /opt/rt-n56u/
+           cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_FILE
         fi
         
     - name: SSH connection to Actions
@@ -79,12 +78,11 @@ jobs:
     - name: Clear And Build
       run: |
         # 修改.config
-        cp -f /opt/rt-n56u/$TCONFIG_FILE /opt/rt-n56u/trunk/.config
+        cp -f /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config /opt/rt-n56u/trunk/.config
         # 清理和构建
         cd /opt/rt-n56u/trunk
         ./clear_tree
-        fakeroot ./build_firmware_modify K2P
-        
+        fakeroot ./build_firmware_modify $TCONFIG_NAME     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
         
