@@ -14,7 +14,8 @@ env:
   DOWN_TOOLCHAIN: true
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/MI-3.config
+  TCONFIG_NAME: MI-3.config
+  TCONFIG_FILE: trunk/configs/templates/$TCONFIG_NAME
 
 jobs:
   build:
@@ -81,7 +82,7 @@ jobs:
         # 清理和构建
         cd /opt/rt-n56u/trunk
         ./clear_tree
-        fakeroot ./build_firmware_modify MI-3     
+        fakeroot ./build_firmware_modify $TCONFIG_NAME     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
