@@ -70,7 +70,13 @@ jobs:
           cd /opt/rt-n56u/toolchain/out/
           tar -zcvf /opt/rt-n56u/toolchain/toolchain_out.tar.gz *
         fi
-        
+   
+    - name : Upload packages tar.gz
+      uses: actions/upload-artifact@v2
+      with:
+        name: toolchain_out.tar.gz
+        path: /opt/rt-n56u/toolchain/toolchain_out.tar.gz
+   
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
@@ -109,8 +115,4 @@ jobs:
         name: Padavan-packages
         path: /opt/images
         
-    - name : Upload packages tar.gz
-      uses: actions/upload-artifact@v2
-      with:
-        name: toolchain_out.tar.gz
-        path: /opt/rt-n56u/toolchain/toolchain_out.tar.gz
+
