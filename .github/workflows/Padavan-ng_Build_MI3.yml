@@ -43,11 +43,9 @@ jobs:
         mkdir -p /opt/images/
            
     - name: Clone Source Code
-      env:
-        GIT_SOURCE_CLONE: https://github.com/hminid/padavan-ng20210510.git
       run: |             
         # 克隆源码
-        git clone --depth=1 $GIT_SOURCE_CLONE /opt/rt-n56u
+        git clone --depth=1 https://github.com/hminid/padavan-ng20210510.git /opt/rt-n56u
        
     - name: Download ToolChain
       run: |
