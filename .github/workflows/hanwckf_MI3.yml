@@ -85,6 +85,7 @@ jobs:
         fakeroot ./build_firmware_modify $TCONFIG_NAME     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
+        
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
