@@ -1,5 +1,5 @@
 #修改 WORK_PAHT: 为要复制的目录
-#修改 TCONFIG_NAME: 配制文件名,要与configs/templates/目录下的名字相同
+#修改 TCONFIG_NAME: 配制文件名要与configs/templates/目录下的名字相同
 
 name: Padavan-ng_Build_MI3
 on:
@@ -12,7 +12,7 @@ on:
         default: 'false'
 env:
   WORK_PAHT: workdata              # mv工作目录
-  TCONFIG_NAME: mi-3
+  TCONFIG_NAME: MI-3
   TCONFIG_PATH: trunk/configs/templates/xiaomi
   CN_DICT_FILE: trunk/user/www/dict/CN.dict
   CN_MAKE_FILE: trunk/user/www/Makefile
@@ -38,7 +38,7 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
         sudo apt install autoconf-archive
-
+        
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
