@@ -1,7 +1,7 @@
 #修改 WORK_PAHT: 为要复制的目录
 #修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
 
-name: Padavan-hanwckf_K2P_5
+name: Padavan-hanwckf_K2P_nano
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -14,7 +14,7 @@ env:
   DOWN_TOOLCHAIN: false
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/K2P_nano-5.0.config
+  TCONFIG_FILE: trunk/configs/templates/K2P_nano.config
 
 jobs:
   build:
@@ -81,7 +81,7 @@ jobs:
         # 清理和构建
         cd /opt/rt-n56u/trunk
         ./clear_tree
-        fakeroot ./build_firmware_modify K2P_nano-5.0     
+        fakeroot ./build_firmware_modify K2P_nano     
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
