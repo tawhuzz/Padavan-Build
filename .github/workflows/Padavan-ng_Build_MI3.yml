@@ -1,5 +1,5 @@
 #修改 WORK_PAHT: 为要复制的目录
-#修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
+#修改 TCONFIG_NAME: 为配制文件名要与configs/templates/目录下的名字相同
 
 name: Padavan-ng_Build_MI3
 on:
@@ -12,7 +12,7 @@ on:
         default: 'false'
 env:
   WORK_PAHT: workdata              # mv工作目录
-  TCONFIG_NAME: mi-3
+  TCONFIG_NAME: MI-3
   TCONFIG_PATH: trunk/configs/templates/xiaomi
   CN_DICT_FILE: trunk/user/www/dict/CN.dict
   CN_MAKE_FILE: trunk/user/www/Makefile
@@ -61,7 +61,21 @@ jobs:
            wget $TOOLCHAIN_URL -O out.tar.gz
            tar -zxvf out.tar.gz -C out/
         fi
-
+        
+    #备份构建工具链
+    - name: Copy toolchain File to toolchain_out.tar.gz
+      run: |
+          #打包tar.gz
+          cd /opt/rt-n56u/toolchain/out/
+          tar -zcvf /opt/rt-n56u/toolchain/toolchain_out.tar.gz *
+   
+    #上传备份构建工具链
+    - name : Upload packages tar.gz
+      uses: actions/upload-artifact@v2
+      with:
+        name: toolchain_out.tar.gz
+        path: /opt/rt-n56u/toolchain/toolchain_out.tar.gz
+   
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
@@ -71,9 +85,9 @@ jobs:
         cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         # 中文无线SSID
-        cp -f trunk/user/www/n56u_ribbon_fixed/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
-        cp -f trunk/user/httpd/aspbw.c /opt/rt-n56u/trunk/user/httpd/aspbw.c 
-        cp -f trunk/user/httpd/httpd.h /opt/rt-n56u/trunk/user/httpd/httpd.h
+        #cp -f trunk/user/www/n56u_ribbon_fixed/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
+        #cp -f trunk/user/httpd/aspbw.c /opt/rt-n56u/trunk/user/httpd/aspbw.c 
+        #cp -f trunk/user/httpd/httpd.h /opt/rt-n56u/trunk/user/httpd/httpd.h
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
@@ -92,7 +106,7 @@ jobs:
         sudo ./build_firmware.sh
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
-
+        
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
