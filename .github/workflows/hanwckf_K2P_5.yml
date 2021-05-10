@@ -1,7 +1,7 @@
 #修改 WORK_PAHT: 为要复制的目录
 #修改 TCONFIG_FILE: 为配制文件路径，注意文件名要与configs/templates/目录下的名字相同
 
-name: Padavan-hanwckf_K2P_5
+name: Padavan-hanwckf_K2P
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -11,10 +11,10 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: false
+  DOWN_TOOLCHAIN: true
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
-  TCONFIG_FILE: trunk/configs/templates/K2P_nano-5.0.config
+  TCONFIG_FILE: trunk/configs/templates/K2P.config
 
 jobs:
   build:
@@ -35,6 +35,7 @@ jobs:
         texinfo build-essential help2man pkg-config zlib1g-dev libgmp3-dev \
         libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget libc-dev-bin
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
+        
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
@@ -56,6 +57,7 @@ jobs:
            cd /opt/rt-n56u/toolchain-mipsel
            sh dl_toolchain.sh
          fi
+         
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
@@ -81,9 +83,11 @@ jobs:
         # 清理和构建
         cd /opt/rt-n56u/trunk
         ./clear_tree
-        fakeroot ./build_firmware_modify K2P_nano-5.0     
+        fakeroot ./build_firmware_modify K2P
+        
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
+        
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
