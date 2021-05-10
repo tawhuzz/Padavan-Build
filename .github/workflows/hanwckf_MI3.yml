@@ -62,10 +62,7 @@ jobs:
         # 拷贝自定义文件
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
-           #cp -rf . /opt/rt-n56u/     
-           #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
-           #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
-           #cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+           #cp -rf . /opt/rt-n56u/
            cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_FILE
         fi
         
