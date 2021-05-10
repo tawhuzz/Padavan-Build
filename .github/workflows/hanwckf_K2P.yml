@@ -11,7 +11,7 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: true
+  DOWN_TOOLCHAIN: false
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_FILE: trunk/configs/templates/K2P.config
