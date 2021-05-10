@@ -63,6 +63,8 @@ jobs:
         #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
         #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        cp -f trunk/user/htop/Makefile /opt/rt-n56u/trunk/user/htop/Makefile
+        cp -f trunk/user/htop/htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/htop-3.0.2.tar.gz
         
         #修正go，否则编译失败
         cd /opt/workdata
