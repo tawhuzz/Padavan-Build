@@ -63,6 +63,7 @@ jobs:
            tar -zxvf out.tar.gz -C out/
         fi
         
+    #备份构建工具链
     - name: Copy toolchain File to toolchain_out.tar.gz
       run: |
         if [ $COPY_TOOLCHAIN = true ] ; then
@@ -71,6 +72,7 @@ jobs:
           tar -zcvf /opt/rt-n56u/toolchain/toolchain_out.tar.gz *
         fi
    
+    #上传备份构建工具链
     - name : Upload packages tar.gz
       uses: actions/upload-artifact@v2
       with:
