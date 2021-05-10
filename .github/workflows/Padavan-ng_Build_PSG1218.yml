@@ -65,7 +65,7 @@ jobs:
         
     - name: Copy toolchain File to toolchain_out.tar.gz
       run: |
-        if [ $COPY_TOOLCHAIN != true ] ; then
+        if [ $COPY_TOOLCHAIN = true ] ; then
           #打包tar.gz
           cd /opt/rt-n56u/toolchain/out/
           tar -zcvf /opt/rt-n56u/toolchain/toolchain_out.tar.gz *
