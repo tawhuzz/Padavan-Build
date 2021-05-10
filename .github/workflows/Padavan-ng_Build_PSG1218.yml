@@ -101,9 +101,16 @@ jobs:
         sudo ./build_firmware.sh
         # 复制到上传目录
         sudo mv -f images/*.trx /opt/images/
+        
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: Padavan-packages
         path: /opt/images
+        
+    - name : Upload packages tar.gz
+      uses: actions/upload-artifact@v2
+      with:
+        name: toolchain_out.tar.gz
+        path: /opt/rt-n56u/toolchain/toolchain_out.tar.gz
