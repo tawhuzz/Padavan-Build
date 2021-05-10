@@ -37,6 +37,7 @@ jobs:
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
+        sudo apt install autoconf-archive
         
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
@@ -86,8 +87,8 @@ jobs:
         cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         # 中文无线SSID
         #cp -f trunk/user/www/n56u_ribbon_fixed/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
-        #cp -f trunk/user/httpd/aspbw.c /opt/rt-n56u/trunk/user/httpd/aspbw.c 
-        #cp -f trunk/user/httpd/httpd.h /opt/rt-n56u/trunk/user/httpd/httpd.h
+        cp -f trunk/user/httpd/aspbw.c /opt/rt-n56u/trunk/user/httpd/aspbw.c 
+        cp -f trunk/user/httpd/httpd.h /opt/rt-n56u/trunk/user/httpd/httpd.h
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
