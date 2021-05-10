@@ -81,8 +81,8 @@ jobs:
         # 拷贝自定义文件
         cd /opt/workdata
         #cp -rf . /opt/rt-n56u/     
-        cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
-        cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
+        #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
+        #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
         #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         # 中文无线SSID
         #cp -f trunk/user/www/n56u_ribbon_fixed/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
