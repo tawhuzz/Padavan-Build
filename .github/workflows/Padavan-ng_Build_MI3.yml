@@ -1,5 +1,5 @@
 #修改 WORK_PAHT: 为要复制的目录
-#修改 TCONFIG_NAME: 为配制文件名要与configs/templates/目录下的名字相同
+#修改 TCONFIG_NAME: 配制文件名,要与configs/templates/目录下的名字相同
 
 name: Padavan-ng_Build_MI3
 on:
@@ -33,12 +33,12 @@ jobs:
       run: |
         # 安装依赖包
         sudo apt-get update
-        sudo apt install autoconf-archive
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
-        
+        sudo apt install autoconf-archive
+
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
@@ -82,9 +82,9 @@ jobs:
         # 拷贝自定义文件
         cd /opt/workdata
         #cp -rf . /opt/rt-n56u/     
-        #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
-        #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
-        #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
+        cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
+        cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
+        cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         # 中文无线SSID
         #cp -f trunk/user/www/n56u_ribbon_fixed/general.js /opt/rt-n56u/trunk/user/www/n56u_ribbon_fixed/general.js
         #cp -f trunk/user/httpd/aspbw.c /opt/rt-n56u/trunk/user/httpd/aspbw.c 
