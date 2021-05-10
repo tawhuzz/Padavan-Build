@@ -60,10 +60,15 @@ jobs:
       run: |
         # 拷贝自定义文件
         cd /opt/workdata
-        #cp -rf . /opt/rt-n56u/     
+        #cp -rf . /opt/rt-n56u/
+        
+        # 汉化
         #cp -f $CN_DICT_FILE  /opt/rt-n56u/$CN_DICT_FILE
         #cp -f $CN_MAKE_FILE  /opt/rt-n56u/$CN_MAKE_FILE
+        
+        # 配制文件
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        
         # htop编译失败,复制一个替换
         cp -f trunk/user/htop/Makefile /opt/rt-n56u/trunk/user/htop/Makefile
         cp -f trunk/user/htop/htop-3.0.2.tar.gz /opt/rt-n56u/trunk/user/htop/htop-3.0.2.tar.gz
