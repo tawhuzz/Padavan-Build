@@ -15,8 +15,8 @@ env:
   COPY_WORK_DATA: false
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_NAME: MI-3.config
-  TCONFIG_FILE: trunk/configs/templates/$TCONFIG_NAME
-
+  TCONFIG_PATH: trunk/configs/templates
+  TCONFIG_FILE: $TCONFIG_PATH/$TCONFIG_NAME
 jobs:
   build:
     runs-on: ubuntu-18.04
