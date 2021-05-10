@@ -17,6 +17,7 @@ env:
   CN_DICT_FILE: trunk/user/www/dict/CN.dict
   CN_MAKE_FILE: trunk/user/www/Makefile
   DOWN_TOOLCHAIN: false
+  COPY_TOOLCHAIN: false
   TOOLCHAIN_URL: https://github.com/hminid/Padavan-ng_MI3_Build/releases/download/v20201115/toolchain_out.tar.gz
 
 jobs:
@@ -61,6 +62,15 @@ jobs:
            wget $TOOLCHAIN_URL -O out.tar.gz
            tar -zxvf out.tar.gz -C out/
         fi
+        
+    - name: Copy toolchain File to toolchain_out.tar.gz
+      run: |
+        if [ $COPY_TOOLCHAIN != true ] ; then
+          #打包tar.gz
+          cd /opt/rt-n56u/toolchain/out/
+          tar -zcvf /opt/rt-n56u/toolchain/toolchain_out.tar.gz *
+        fi
+        
     - name: Copy workdata File
       run: |
         # 拷贝自定义文件
