@@ -12,7 +12,7 @@ on:
         default: 'false'
 env:
   DOWN_TOOLCHAIN: false
-  COPY_WORK_DATA: false
+  COPY_WORK_DATA: true
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_NAME: PSG1218
   TCONFIG_PATH: trunk/configs/templates
