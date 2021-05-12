@@ -35,7 +35,7 @@ jobs:
         echo $time"11111111111111111"
         TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
         echo $TCONFIG_FILE
-        cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        cp -f $TCONFIG_FILE  "/opt/rt-n56u/"$TCONFIG_FILE
         
         
         
