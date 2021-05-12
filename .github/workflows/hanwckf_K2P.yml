@@ -65,7 +65,8 @@ jobs:
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-           cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_FILE
+           str_TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
+           cp -f $str_TCONFIG_FILE  "/opt/rt-n56u/"$str_TCONFIG_FILE
         fi
         
     - name: SSH connection to Actions
