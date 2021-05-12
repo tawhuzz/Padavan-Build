@@ -16,7 +16,6 @@ env:
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_NAME: PSG1218
   TCONFIG_PATH: trunk/configs/templates
-  
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -30,6 +29,11 @@ jobs:
         DEBIAN_FRONTEND: noninteractive  # 非交互模式
       run: |
         # 安装依赖包
+        
+        
+        TCONFIG_FILE = $TCONFIG_PATH/$TCONFIG_NAME.config
+        echo TCONFIG_FILE=$TCONFIG_FILE
+        cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
         sudo apt update
         sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
         fakeroot kmod cpio git python3-docutils gettext automake autopoint \
@@ -60,16 +64,12 @@ jobs:
          fi
          
     - name: Copy workdata File
-      env:
-        TCONFIG_FILE: /opt/workdata
       run: |
         # 拷贝自定义文件
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-           TCONFIG_FILE = $TCONFIG_PATH/$TCONFIG_NAME.config
-           echo TCONFIG_FILE=$TCONFIG_FILE
-           cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+
            #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         fi
         
