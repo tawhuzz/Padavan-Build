@@ -31,8 +31,10 @@ jobs:
         # 安装依赖包
         
         echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        var  $TCONFIG_PATH/$TCONFIG_NAME.config
-        echo TCONFIG_FILE=$TCONFIG_FILE
+        time=$(date)
+        echo $time
+        var  TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
+        echo $TCONFIG_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
         
         
