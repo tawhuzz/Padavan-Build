@@ -64,15 +64,8 @@ jobs:
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-           #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
-
-           echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-           time=$(date)
-           echo $time"11111111111111111"
            TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
-           echo $TCONFIG_FILE
            cp -f $TCONFIG_FILE  "/opt/rt-n56u/"$TCONFIG_FILE
-
         fi
         
     - name: SSH connection to Actions
