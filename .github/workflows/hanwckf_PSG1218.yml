@@ -65,8 +65,9 @@ jobs:
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-           srt_tconfig_file = "$TCONFIG_PATH/$TCONFIG_NAME.config"
-           cp -f $(srt_tconfig_file)  /opt/rt-n56u/$(srt_tconfig_file)
+           srt_TCONFIG_FILE = "$TCONFIG_PATH/$TCONFIG_NAME.config"
+           echo "srt_TCONFIG_FILE $srt_TCONFIG_FILE"
+           cp -f $srt_TCONFIG_FILE  /opt/rt-n56u/$srt_TCONFIG_FILE
            #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         fi
         
