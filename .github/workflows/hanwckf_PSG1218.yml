@@ -30,10 +30,13 @@ jobs:
       run: |
         # 安装依赖包
         
-        
-        var TCONFIG_FILE = $TCONFIG_PATH/$TCONFIG_NAME.config
+        echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        var  $TCONFIG_PATH/$TCONFIG_NAME.config
         echo TCONFIG_FILE=$TCONFIG_FILE
         cp -f $TCONFIG_FILE  /opt/rt-n56u/$TCONFIG_FILE
+        
+        
+        
         sudo apt update
         sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
         fakeroot kmod cpio git python3-docutils gettext automake autopoint \
