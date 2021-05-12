@@ -29,16 +29,6 @@ jobs:
         DEBIAN_FRONTEND: noninteractive  # 非交互模式
       run: |
         # 安装依赖包
-        
-        echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        time=$(date)
-        echo $time"11111111111111111"
-        TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
-        echo $TCONFIG_FILE
-        cp -f $TCONFIG_FILE  "/opt/rt-n56u/"$TCONFIG_FILE
-        
-        
-        
         sudo apt update
         sudo apt install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd \
         fakeroot kmod cpio git python3-docutils gettext automake autopoint \
@@ -74,8 +64,15 @@ jobs:
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-
            #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
+
+           echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+           time=$(date)
+           echo $time"11111111111111111"
+           TCONFIG_FILE=$TCONFIG_PATH/$TCONFIG_NAME.config
+           echo $TCONFIG_FILE
+           cp -f $TCONFIG_FILE  "/opt/rt-n56u/"$TCONFIG_FILE
+
         fi
         
     - name: SSH connection to Actions
