@@ -11,7 +11,7 @@ on:
         required: false
         default: 'false'
 env:
-  DOWN_TOOLCHAIN: false
+  DOWN_TOOLCHAIN: true
   COPY_WORK_DATA: true
   WORK_PAHT: workdata_hanwckf              # mv工作目录
   TCONFIG_NAME: PSG1218
@@ -65,7 +65,9 @@ jobs:
         if [ $COPY_WORK_DATA = true ] ; then
            cd /opt/workdata
            #cp -rf . /opt/rt-n56u/
-           cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
+           srt_tconfig_file = "$TCONFIG_PATH/$TCONFIG_NAME.config"
+           cp -f $(srt_tconfig_file)  /opt/rt-n56u/$(srt_tconfig_file)
+           #cp -f $TCONFIG_PATH/$TCONFIG_NAME.config  /opt/rt-n56u/$TCONFIG_PATH/$TCONFIG_NAME.config
         fi
         
     - name: SSH connection to Actions
