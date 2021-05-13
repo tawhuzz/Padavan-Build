@@ -115,6 +115,5 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: /opt/images/*.trx
         tag: ${{ steps.current-time.outputs.formattedTime }}
-          body: 本固件为自动编译，适配机型 MI-R3G padavan固件
         file_glob: true
         overwrite: true
