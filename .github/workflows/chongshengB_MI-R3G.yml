@@ -106,7 +106,7 @@ jobs:
       uses: iboosting/get-current-time@master
       id: current-time
       with:
-        format: $(date +"%Y-%m-%d.%H:%M")
+        format: %Y-%m-%d.%H:%M
         utcOffset: "+08:00"
 
     - name: Upload binaries to release
