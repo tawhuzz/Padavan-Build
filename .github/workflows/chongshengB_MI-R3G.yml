@@ -115,9 +115,6 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: /opt/images/*.trx
         tag: ${{ steps.current-time.outputs.formattedTime }}
-          body:
-            1. 本固件为自动编译，适配机型 MI-R3G padavan固件
-            2. 使用 chongshengB 的最新源码 https://github.com/chongshengB/rt-n56u
-            3. 仅集成 科学上网 SmartDNS 插件，其他插件移除。
+          body: 本固件为自动编译，适配机型 MI-R3G padavan固件
         file_glob: true
         overwrite: true
