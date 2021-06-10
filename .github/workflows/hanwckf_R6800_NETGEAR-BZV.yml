@@ -1,7 +1,7 @@
 #修改 WORK_PAHT: 为要复制的目录
 #修改 TCONFIG_NAME: 为配制文件要与configs/templates/目录下的名字相同
 
-name: Padavan-hanwckf-R6800_NETGEAR-BZV
+name: Padavan-hanwckf_R6800_NETGEAR-BZV
 on:
   repository_dispatch:
   workflow_dispatch:
