@@ -44,7 +44,9 @@ jobs:
     - name: Clone Source Code
       run: |             
         # 克隆源码
-        git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+        # git clone --depth=1 https://github.com/hanwckf/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/hminid/rt-n56u.git /opt/rt-n56u
+        
        
     - name: Download ToolChain
       run: |
