@@ -33,7 +33,8 @@ jobs:
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget 
         sudo timedatectl set-timezone 'Asia/Shanghai'  # 设置时区
-        
+        # 设置时区
+        sudo timedatectl set-timezone 'Asia/Shanghai'
         # 创建自定义目录/opt/workdata
         mv $WORK_PAHT /opt/workdata
         mkdir -p /opt/images/
